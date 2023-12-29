@@ -1,0 +1,26 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>芝士首页</title>
+</head>
+<body>
+    {% extends 'learning_logs/base.html' %}
+    {% block page_header %}
+        <div class="p-3 mb-4 bg-light border rounded-3">
+            <div class="container-fluid py-4">
+                <h1 class="display-3">记录你的学习成果</h1>
+                <p class="lead">Make your own Learning Log,_and keep a list of thetopicsyou'relearning about.
+                    Whenever you learn something newabout a topic, make an entry summarizing what you've learned.
+                </p>
+                <p class="lead">制作你自己的学习日志，并把你正在学习的主题列在一张清单上。
+每当你对一个话题有了新的了解，就做一个总结。
+                </p>
+                <a class="btn btn-primary btn-lg mt-1" href="{% url 'accounts:register' %}">点我注册 &raquo</a>
+            </div>
+        </div>
+    {% endblock page_header %}
+
+</body>
+</html>

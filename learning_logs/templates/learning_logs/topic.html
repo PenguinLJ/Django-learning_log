@@ -1,0 +1,39 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>主题详情</title>
+</head>
+<body>
+{% extends 'learning_logs/base.html' %}
+{% block page_header %}
+    <h1>{{ topic.text }}</h1>
+{% endblock page_header %}
+{% block content%}
+    <p>
+        <a href="{% url 'learning_logs:new_entry' topic.id %}">添加新条目</a>
+    </p>
+        {% for entry in entries %}
+            <div class="card mb-3">
+                <h4 class="card-header">
+                    {{ entry.date_added|date:'M d, Y H:i' }}
+                    <small>
+                        <a href="{% url 'learning_logs:edit_entry' entry.id%}">
+                            编辑条目
+                        </a>
+                    </small>
+                </h4>
+                <div class="card-body">
+                    {{ entry.text|linebreaks }}
+                </div>
+            </div>
+        {% empty %}
+            <li>当前主题还没有条目.</li>
+        {% endfor %}
+{% endblock content%}
+</body>
+</html>

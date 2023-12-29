@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Base</title>
+    {% load django_bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+</head>
+<body>
+<nav class="navbar navbar-expand-md navbar-light bg-light mb-4 border">
+     <div class="container-fluid">
+    <a class="navbar-brand" href="{% url 'learning_logs:index' %}">
+     学习日志</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+     data-bs-target="#navbarCollapse" aria-controls="navbarCollapse"
+     aria-expanded="false" aria-label="Toggle navigation">
+     <span class="navbar-toggler-icon"></span>
+     </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav me-auto mb-2 mb-md-0">
+            <li class="nav-item">
+             <a class="nav-link" href="{% url 'learning_logs:topics' %}">
+             主题</a>
+            </li>
+             </ul> <!-- 定义导航栏左侧链接的代码到此结束 -->
+            <ul class="navbar-nav ms-auto mb-2 mb-md-0">
+            {% if user.is_authenticated  %}
+                <li>
+                    <span class="navbar-text me-2">你好啊,{{ user.username }}！</span>
+                </li>
+                {% else %}
+                    <li class="nav-item"><a class="nav-link" href="{% url 'accounts:register' %}">注册账号</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'accounts:login' %}">登录</a></li>
+                {% endif %}
+            </ul><!--与账号相关的链接到此结束-->
+            {% if user.is_authenticated  %}
+                <form action="{% url 'accounts:logout' %}" method="post">
+                    {% csrf_token %}
+                    <button name="submit" class="btn btn-outline-secondary btn-sm">退出当前账号</button>
+                </form>
+            {% endif %}
+         </div> <!-- 定义导航栏可折叠部分的代码到此结束 -->
+     </div> <!-- 定义导航栏容器的代码到此结束 -->
+ </nav> <!-- 定义导航栏的代码到此结束 -->
+
+<main class="container">
+    <div class="pb-2 mb-2 border-bottom">
+     {% block page_header %}{% endblock page_header %}
+     </div>
+    <div>
+     {% block content %}{% endblock content %}
+     </div>
+</main>
+            {#我们在最后一行插入了一对块标签这个块名为 content，是一个占位#}
+        {#符，其中包含的信息由子模板指定。#}
+        {#子模板并非必须定义父模板中的每个块，因此在父模板中，可以使用任意多个块#}
+        {#来预留空间，而子模板可根据需要定义相应数量的块。#}
+
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>编辑条目</title>
+</head>
+<body>
+    {% extends "learning_logs/base.html" %}
+    {% block content %}
+        <p><a href="{% url 'learning_logs:topic' topic.id%}">{{ topic }}</a></p>
+        <p>编辑此条目:</p>
+        <form action="{% url 'learning_logs:edit_entry' entry.id %}" method="post">
+            {% csrf_token %}
+            {{ form.as_div }}
+        <button name="submit">保存更改</button>
+        </form>
+    {% endblock content %}
+
+</body>
+</html>
